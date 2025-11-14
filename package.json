@@ -1,21 +1,29 @@
 {
-  "name": "rutube-playwright-tests",
+  "name": "code",
   "version": "1.0.0",
-  "description": "Автотесты для сайта rutube.ru на Playwright",
-  "author": "danil",
-  "license": "ISC",
-  "scripts": {
-    "test": "npx playwright test",
-    "test:headed": "npx playwright test --headed",
-    "test:report": "npx playwright test --reporter=html"
+  "main": "CheetsFoMe.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shokk-QA/Code.git"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shokk-QA/Code/issues"
+  },
+  "homepage": "https://github.com/Shokk-QA/Code#readme",
+  "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.56.1",
-    "@types/node": "^24.8.1"
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.43.0",
+    "@typescript-eslint/parser": "^8.43.0",
+    "eslint": "^9.35.0",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
-    "dotenv": "^17.2.3",
-    "playwright-extra": "^4.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2"
+    "dotenv": "^17.2.3"
   }
 }

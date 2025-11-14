@@ -14,7 +14,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  */
 export default defineConfig({
   testDir: './tests',
-  snapshotPathTemplate: '{testDir}/snapshots/{testFilePath}/{arg}{ext}',
+  snapshotPathTemplate: '{testDir}/screenshots/{testFilePath}/{arg}{ext}',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -22,45 +22,41 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 4 : undefined,
+  workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: process.env.BASE_URL || 'https://mes.inka.team',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+
+    /* Connect to remote browser if REMOTE is set */
+    ...(process.env.REMOTE && {
+      connectOptions: {
+        wsEndpoint: process.env.REMOTE,
+      },
+    }),
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium autorized',
-      use: { ...devices['Desktop Chrome'], storageState: 'tests/playwright/.auth/user.json' },
-      dependencies: ['auth'],
-      testDir: 'tests/pages/authorized',
-    },
-    {
-      name: 'chromium unautorized',
+      name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-      testDir: 'tests/pages/unauthorizeded',
     },
+
     {
-      name: 'auth',
-      testMatch: 'tests/specs/authTest.spec.ts',
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {
