@@ -1,14 +1,21 @@
 {
-  "name": "test-hr",
+  "name": "rutube-playwright-tests",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
+  "description": "Автотесты для сайта rutube.ru на Playwright",
+  "author": "danil",
   "license": "ISC",
-  "description": "",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:report": "npx playwright test --reporter=html"
+  },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.10.1"
+    "@types/node": "^24.8.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
