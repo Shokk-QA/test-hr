@@ -67,9 +67,11 @@ export class UserPage {
   }
 
   async verifyTableColumnsCount(expectedCount: number = 5) {
+    // Ждем появления хотя бы одного столбца (или видимости всего table)
+    await this.page.waitForSelector('[role="columnheader"]', { state: 'visible', timeout: 5000 }); //Без этой хрени ратобать не будет
     const headers = this.page.locator('[role="columnheader"]');
     const count = await headers.count();
-    expect(count).toBe(expectedCount);
+    await expect(count).toBe(expectedCount);
   }
 
   async verifyTableIsVisible() {
@@ -78,6 +80,8 @@ export class UserPage {
   }
 
   async verifyHeadersPresence() {
+    // Ждем появления хотя бы одного заголовка
+    await this.page.waitForSelector('[role="columnheader"]', { state: 'visible', timeout: 5000 }); //Либо так либо в конфиге прописывать
     const headers = this.page.locator('[role="columnheader"]');
     const headerTexts = await headers.allTextContents();
     const requiredHeaders = ['Логин', 'Имя', 'Фамилия', 'Email'];
@@ -87,6 +91,7 @@ export class UserPage {
       expect(found).toBeTruthy();
     }
   }
+
   async dragAndDrop() {
     //Это адский геморой
     // Получаем начальные позиции через поиск индекса
