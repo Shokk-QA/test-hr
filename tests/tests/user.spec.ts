@@ -1,4 +1,4 @@
-import { expect, test } from 'playwright/test';
+import { expect, test } from '@playwright/test';
 import { UserPage } from '../pageObject/userPage';
 
 test.describe('Переход на страницу и авторизация', () => {

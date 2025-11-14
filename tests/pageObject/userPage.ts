@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from 'playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 export class UserPage {
   private readonly page: Page;
@@ -32,17 +32,8 @@ export class UserPage {
     await this.page.goto('https://mes.inka.team/ru/form/user-table');
   }
   async autAdmin() {
-    const username = process.env.USERNAME;
-    const password = process.env.PASSWORD;
-
-    if (!username || !password) {
-      throw new Error(
-        'Учетные данные не заданы. Пожалуйста, установите переменные окружения USERNAME и PASSWORD в файле .env',
-      );
-    }
-
-    await this.authLoginLocator.fill(username);
-    await this.authPasswordLocator.fill(password);
+    await this.authLoginLocator.fill(process.env.LOGIN!);
+    await this.authPasswordLocator.fill(process.env.PASSWORD!);
     await this.signInButtonLocator.click();
   }
   async addUser(name: string, surname: string) {
