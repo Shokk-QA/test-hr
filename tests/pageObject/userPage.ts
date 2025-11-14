@@ -97,6 +97,7 @@ export class UserPage {
     }
   }
   async dragAndDrop() {
+    //Это адский геморой
     // Получаем начальные позиции через поиск индекса
     const headers = this.page.locator('[role="columnheader"]');
     const count = await headers.count();
